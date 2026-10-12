@@ -1,0 +1,97 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 700,
+  "height": 500,
+  "title": {
+    "text": "Where did food horticulture value change the most?",
+    "subtitle": "Percentage change in food horticulture farm-gate value, 2023–24 to 2024–25",
+    "fontSize": 20,
+    "subtitleFontSize": 13,
+    "anchor": "start"
+  },
+  "data": {
+    "url": "data/australia_states.geojson",
+    "format": {
+      "type": "json",
+      "property": "features"
+    }
+  },
+  "transform": [
+    {
+      "lookup": "properties.STATE_NAME",
+      "from": {
+        "data": {
+          "url": "data/horticulture_state_2024_25.csv"
+        },
+        "key": "state",
+        "fields": [
+          "horticulture_value_2023_24",
+          "horticulture_value_2024_25",
+          "pct_change"
+        ]
+      }
+    },
+    {
+      "calculate": "datum['properties']['STATE_NAME']",
+      "as": "state_name"
+    },
+    {
+      "calculate": "datum.state_name == 'Australian Capital Territory' ? null : datum.pct_change",
+      "as": "map_pct_change"
+    },
+    {
+      "calculate": "format(datum.pct_change, '.1f') + '%'",
+      "as": "pct_change_label"
+    },
+    {
+      "calculate": "'$' + format(datum.horticulture_value_2024_25, ',.1f') + 'm'",
+      "as": "value_2024_25_label"
+    }
+  ],
+  "projection": {
+    "type": "mercator"
+  },
+  "mark": {
+    "type": "geoshape",
+    "stroke": "white",
+    "strokeWidth": 1
+  },
+  "encoding": {
+    "color": {
+      "field": "map_pct_change",
+      "type": "quantitative",
+      "title": "% change",
+      "scale": {
+        "domain": [-3, 12],
+        "domainMid": 0,
+        "scheme": "redyellowgreen"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "state_name",
+        "type": "nominal",
+        "title": "State"
+      },
+      {
+        "field": "value_2024_25_label",
+        "type": "nominal",
+        "title": "2024–25 value"
+      },
+      {
+        "field": "pct_change_label",
+        "type": "nominal",
+        "title": "Change"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    }
+  }
+}

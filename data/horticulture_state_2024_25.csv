@@ -1,9 +1,9 @@
-state,horticulture_value_m
-Victoria,4470.5
-Queensland,3856.7
-New South Wales,2826.1
-South Australia,2418.2
-Tasmania,1131.5
-Western Australia,1080.1
-Northern Territory,206.3
-Australian Capital Territory,0.4
+state,horticulture_value_2023_24,horticulture_value_2024_25,pct_change
+New South Wales,2652.00,2826.10,6.56
+Victoria,4205.36,4470.50,6.30
+Queensland,3509.59,3856.70,9.89
+South Australia,2229.41,2418.20,8.47
+Western Australia,1109.40,1080.10,-2.64
+Tasmania,1011.50,1131.50,11.86
+Northern Territory,193.70,206.30,6.50
+Australian Capital Territory,0.20,0.40,100.00

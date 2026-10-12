@@ -85,3 +85,7 @@ footer {
   font-size: 13px;
   color: #667067;
 }
+
+.chart-card + .chart-card {
+  margin-top: 30px;
+}

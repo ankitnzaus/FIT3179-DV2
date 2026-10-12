@@ -1,0 +1,75 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 700,
+  "height": 360,
+  "title": {
+    "text": "Victoria leads Australia's food horticulture sector",
+    "subtitle": "Food horticulture farm-gate value by state, 2024–25",
+    "fontSize": 20,
+    "subtitleFontSize": 13,
+    "anchor": "start"
+  },
+  "data": {
+    "url": "data/horticulture_state_2024_25.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.state != 'Australian Capital Territory'"
+    },
+    {
+      "calculate": "datum.horticulture_value_2024_25 / 1000",
+      "as": "value_b"
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 4
+  },
+  "encoding": {
+    "y": {
+      "field": "state",
+      "type": "nominal",
+      "sort": "-x",
+      "title": null,
+      "axis": {
+        "labelFontSize": 12,
+        "labelLimit": 180
+      }
+    },
+    "x": {
+      "field": "value_b",
+      "type": "quantitative",
+      "title": "Farm-gate value ($ billions)",
+      "axis": {
+        "format": ".1f",
+        "labelFontSize": 11,
+        "titleFontSize": 12
+      }
+    },
+    "color": {
+      "condition": {
+        "test": "datum.state == 'Victoria'",
+        "value": "#2f6b49"
+      },
+      "value": "#9fbd96"
+    },
+    "tooltip": [
+      {
+        "field": "state",
+        "type": "nominal",
+        "title": "State"
+      },
+      {
+        "field": "value_b",
+        "type": "quantitative",
+        "title": "2024–25 value ($b)",
+        "format": ".2f"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

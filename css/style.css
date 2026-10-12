@@ -89,3 +89,39 @@ footer {
 .chart-card + .chart-card {
   margin-top: 30px;
 }
+
+.site-footer {
+  padding: 60px 0;
+  background: #e7eee4;
+  border-top: 1px solid #cfd8cc;
+}
+
+.site-footer h3 {
+  margin-top: 0;
+  margin-bottom: 30px;
+  font-size: 24px;
+  color: #244b35;
+}
+
+.site-footer p {
+  max-width: 850px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.site-footer a {
+  color: #376f4b;
+  font-weight: 600;
+}
+
+.method-note,
+.ai-note {
+  margin-top: 30px;
+  font-size: 14px;
+}
+
+.author {
+  margin-top: 40px;
+  font-size: 13px;
+  color: #617064;
+}

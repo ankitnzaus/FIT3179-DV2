@@ -1,0 +1,87 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f6f3ea;
+  color: #24352d;
+}
+
+.container {
+  width: min(1100px, 92%);
+  margin: 0 auto;
+}
+
+.hero {
+  padding: 90px 0 70px;
+  background: #e7eee4;
+}
+
+.eyebrow {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #61765e;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: clamp(52px, 8vw, 88px);
+  line-height: 0.95;
+  margin: 0;
+  color: #244b35;
+}
+
+.hero h2 {
+  font-size: 25px;
+  font-weight: 500;
+  max-width: 720px;
+  margin-top: 25px;
+}
+
+.intro {
+  max-width: 750px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #526056;
+}
+
+.section {
+  padding: 80px 0;
+}
+
+.section-number {
+  font-size: 15px;
+  font-weight: bold;
+  color: #8b9f79;
+  margin-bottom: 8px;
+}
+
+.section h2 {
+  font-size: 42px;
+  margin: 0 0 16px;
+  color: #244b35;
+}
+
+.section-intro {
+  max-width: 720px;
+  font-size: 17px;
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+.chart-card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  min-height: 450px;
+}
+
+footer {
+  padding: 35px 0;
+  border-top: 1px solid #d5d5cf;
+  font-size: 13px;
+  color: #667067;
+}

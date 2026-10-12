@@ -1,0 +1,91 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 700,
+  "height": 360,
+  "title": {
+    "text": "Different states specialise in different horticultural products",
+    "subtitle": "Farm-gate value by food horticulture category and state, 2024–25",
+    "fontSize": 20,
+    "subtitleFontSize": 13,
+    "anchor": "start"
+  },
+  "data": {
+    "url": "data/horticulture_category_state_2024_25.csv"
+  },
+  "mark": {
+    "type": "rect",
+    "stroke": "white",
+    "strokeWidth": 1
+  },
+  "encoding": {
+    "x": {
+      "field": "category",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "Fruit",
+        "Vegetables",
+        "Nuts",
+        "Wine grapes"
+      ],
+      "axis": {
+        "labelFontSize": 12,
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "state",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "Queensland",
+        "Victoria",
+        "New South Wales",
+        "South Australia",
+        "Tasmania",
+        "Western Australia",
+        "Northern Territory",
+        "Australian Capital Territory"
+      ],
+      "axis": {
+        "labelFontSize": 12,
+        "labelLimit": 180
+      }
+    },
+    "color": {
+      "field": "value_m",
+      "type": "quantitative",
+      "title": "Farm-gate value ($m)",
+      "scale": {
+        "scheme": "greens"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "state",
+        "type": "nominal",
+        "title": "State"
+      },
+      {
+        "field": "category",
+        "type": "nominal",
+        "title": "Category"
+      },
+      {
+        "field": "value_m",
+        "type": "quantitative",
+        "title": "Value ($m)",
+        "format": ",.1f"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    }
+  }
+}

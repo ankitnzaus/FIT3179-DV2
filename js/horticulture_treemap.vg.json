@@ -1,0 +1,184 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "width": 700,
+  "height": 400,
+  "padding": 5,
+
+  "title": {
+    "text": "Fruit and vegetables dominate Australia's food horticulture",
+    "subtitle": "Farm-gate value by horticulture category, 2024–25",
+    "anchor": "start",
+    "fontSize": 20,
+    "subtitleFontSize": 13,
+    "offset": 15
+  },
+
+  "data": [
+    {
+      "name": "tree",
+      "url": "data/horticulture_australia_2024_25.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "value_m": "number"
+        }
+      },
+      "transform": [
+        {
+          "type": "stratify",
+          "key": "category",
+          "parentKey": "parent"
+        },
+        {
+          "type": "treemap",
+          "field": "value_m",
+          "sort": {
+            "field": "value_m",
+            "order": "descending"
+          },
+          "round": true,
+          "method": "squarify",
+          "ratio": 1.6,
+          "size": [700, 400]
+        }
+      ]
+    },
+
+    {
+      "name": "leaves",
+      "source": "tree",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.category != 'Australia'"
+        }
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": [
+        "Fruit",
+        "Vegetables",
+        "Nuts",
+        "Wine grapes"
+      ],
+      "range": [
+        "#376f4b",
+        "#6f9c68",
+        "#a3bd8e",
+        "#c9d5aa"
+      ]
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "rect",
+      "from": {
+        "data": "leaves"
+      },
+      "encode": {
+        "enter": {
+          "fill": {
+            "scale": "color",
+            "field": "category"
+          },
+          "stroke": {
+            "value": "white"
+          },
+          "strokeWidth": {
+            "value": 2
+          }
+        },
+        "update": {
+          "x": {
+            "field": "x0"
+          },
+          "y": {
+            "field": "y0"
+          },
+          "x2": {
+            "field": "x1"
+          },
+          "y2": {
+            "field": "y1"
+          },
+          "tooltip": {
+            "signal": "{'Category': datum.category, 'Farm-gate value ($m)': format(datum.value_m, ',.1f')}"
+          }
+        }
+      }
+    },
+
+    {
+      "type": "text",
+      "from": {
+        "data": "leaves"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "(datum.x0 + datum.x1) / 2"
+          },
+          "y": {
+            "signal": "(datum.y0 + datum.y1) / 2 - 10"
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "fill": {
+            "value": "white"
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fontSize": {
+            "signal": "datum.value_m > 3000 ? 18 : 14"
+          },
+          "text": {
+            "field": "category"
+          }
+        }
+      }
+    },
+
+    {
+      "type": "text",
+      "from": {
+        "data": "leaves"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "(datum.x0 + datum.x1) / 2"
+          },
+          "y": {
+            "signal": "(datum.y0 + datum.y1) / 2 + 14"
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "fill": {
+            "value": "white"
+          },
+          "fontSize": {
+            "value": 13
+          },
+          "text": {
+            "signal": "'$' + format(datum.value_m / 1000, '.2f') + 'B'"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,18 +1,25 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "width": 570,
-  "height": 430,
+  "width": 620,
+  "height": 340,
 
   "title": {
     "text": "Around three in every ten tonnes of food waste comes from households",
     "subtitle": "Approximate household share of Australia's annual food waste",
     "anchor": "start",
-    "fontSize": 21,
-    "subtitleFontSize": 14,
-    "subtitleColor": "#5f6b63",
-    "color": "#1f3529",
-    "offset": 18
+
+    "font": "Manrope",
+    "fontSize": 20,
+    "fontWeight": 700,
+    "color": "#183f2c",
+
+    "subtitleFont": "Source Sans 3",
+    "subtitleFontSize": 13,
+    "subtitleFontWeight": 400,
+    "subtitleColor": "#68746d",
+
+    "offset": 50
   },
 
   "data": {
@@ -40,7 +47,7 @@
 
   "mark": {
     "type": "square",
-    "size": 900,
+    "size": 820,
     "cornerRadius": 3
   },
 
@@ -61,21 +68,34 @@
     "color": {
       "field": "group",
       "type": "nominal",
+
       "scale": {
         "domain": [
           "Household waste",
           "Other stages"
         ],
         "range": [
-          "#93643f",
-          "#e5e7df"
+          "#b08a68",
+          "#e8e9e3"
         ]
       },
+
       "legend": {
         "title": null,
         "orient": "bottom",
         "direction": "horizontal",
-        "labelFontSize": 12
+        "columns": 2,
+
+        "symbolType": "square",
+        "symbolSize": 130,
+
+        "labelFont": "Source Sans 3",
+        "labelFontSize": 12,
+        "labelColor": "#43544a",
+        "labelLimit": 200,
+
+        "columnPadding": 28,
+        "offset": 14
       }
     },
 
@@ -93,15 +113,6 @@
 
     "view": {
       "stroke": null
-    },
-
-    "title": {
-      "font": "Arial",
-      "subtitleFont": "Arial"
-    },
-
-    "legend": {
-      "labelFont": "Arial"
     }
   }
 }

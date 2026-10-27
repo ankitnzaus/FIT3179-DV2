@@ -1,14 +1,15 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "width": 860,
+  "width": "container",
   "height": {
-    "step": 48
+    "step": 46
   },
+
   "padding": {
     "left": 10,
-    "top": 10,
-    "right": 140,
+    "top": 8,
+    "right": 50,
     "bottom": 10
   },
 
@@ -16,13 +17,18 @@
     "text": "Food inflation was no higher than headline inflation in any capital city",
     "subtitle": "Annual percentage change, June 2026",
     "anchor": "start",
+
+    "font": "Manrope",
     "fontSize": 20,
-    "font": "sans-serif",
-    "fontWeight": "bold",
+    "fontWeight": 700,
+    "color": "#183f2c",
+
+    "subtitleFont": "Source Sans 3",
     "subtitleFontSize": 13,
-    "subtitleColor": "#5f6f63",
-    "color": "#233d2f",
-    "offset": 14
+    "subtitleFontWeight": 400,
+    "subtitleColor": "#68746d",
+
+    "offset": 50
   },
 
   "data": {
@@ -50,10 +56,12 @@
         "stroke": "#c8c2b7",
         "strokeWidth": 3
       },
+
       "encoding": {
         "y": {
           "field": "city",
           "type": "nominal",
+
           "sort": [
             "Hobart",
             "Adelaide",
@@ -64,22 +72,32 @@
             "Perth",
             "Melbourne"
           ],
+
           "axis": {
             "title": null,
+            "labelFont": "Source Sans 3",
             "labelFontSize": 14,
+            "labelFontWeight": 500,
             "labelColor": "#233d2f",
             "labelPadding": 12,
             "ticks": false,
             "domain": false
           }
         },
+
         "x": {
           "field": "food_cpi",
-          "type": "quantitative"
+          "type": "quantitative",
+          "scale": {
+            "domain": [2.5, 4.5],
+            "zero": false
+          }
         },
+
         "x2": {
           "field": "all_groups_cpi"
         },
+
         "tooltip": [
           {
             "field": "city",
@@ -89,7 +107,7 @@
           {
             "field": "food_cpi",
             "type": "quantitative",
-            "title": "Food & non-alcoholic beverages",
+            "title": "Food prices",
             "format": ".1f"
           },
           {
@@ -101,7 +119,7 @@
           {
             "field": "gap",
             "type": "quantitative",
-            "title": "Gap",
+            "title": "Difference",
             "format": ".1f"
           }
         ]
@@ -120,22 +138,26 @@
             "value"
           ]
         },
+
         {
-          "calculate": "datum.series === 'food_cpi' ? 'Food & non-alcoholic beverages' : 'All groups CPI'",
+          "calculate": "datum.series === 'food_cpi' ? 'Food prices' : 'All groups CPI'",
           "as": "series_label"
         }
       ],
+
       "mark": {
         "type": "point",
         "filled": true,
-        "size": 130,
-        "stroke": "white",
+        "size": 125,
+        "stroke": "#ffffff",
         "strokeWidth": 1.2
       },
+
       "encoding": {
         "y": {
           "field": "city",
           "type": "nominal",
+
           "sort": [
             "Hobart",
             "Adelaide",
@@ -147,48 +169,78 @@
             "Melbourne"
           ]
         },
+
         "x": {
           "field": "value",
           "type": "quantitative",
+
           "scale": {
-            "domain": [2.5, 4.5]
+            "domain": [2.5, 4.5],
+            "zero": false
           },
+
           "axis": {
             "title": "Annual change (%)",
-            "titleFontSize": 14,
+
+            "titleFont": "Source Sans 3",
+            "titleFontSize": 13,
+            "titleFontWeight": 600,
             "titleColor": "#233d2f",
-            "labelFontSize": 13,
-            "labelColor": "#233d2f",
+
+            "labelFont": "Source Sans 3",
+            "labelFontSize": 12,
+            "labelColor": "#536158",
+
             "grid": true,
             "gridColor": "#ddd8ce",
             "gridOpacity": 1,
+
             "tickColor": "#b7b1a4",
             "domain": false,
-            "values": [2.5, 3.0, 3.5, 4.0, 4.5]
+
+            "values": [
+              2.5,
+              3.0,
+              3.5,
+              4.0,
+              4.5
+            ]
           }
         },
+
         "color": {
           "field": "series_label",
           "type": "nominal",
+
           "scale": {
             "domain": [
-              "Food & non-alcoholic beverages",
+              "Food prices",
               "All groups CPI"
             ],
+
             "range": [
               "#93643f",
               "#6f8f71"
             ]
           },
+
           "legend": {
             "title": null,
             "orient": "top",
             "direction": "horizontal",
+
             "symbolType": "circle",
-            "labelFontSize": 13,
-            "labelColor": "#233d2f"
+            "symbolSize": 90,
+
+            "labelFont": "Source Sans 3",
+            "labelFontSize": 12,
+            "labelFontWeight": 600,
+            "labelColor": "#233d2f",
+
+            "offset": 12
           }
         },
+
         "tooltip": [
           {
             "field": "city",
@@ -213,22 +265,28 @@
     {
       "transform": [
         {
-          "filter": "datum.city === 'Hobart' || datum.city === 'Adelaide' || datum.city === 'Canberra' || datum.city === 'Melbourne'"
+          "filter": "datum.city === 'Adelaide'"
         }
       ],
+
       "mark": {
         "type": "text",
-        "align": "left",
-        "dx": 10,
-        "dy": -10,
+        "align": "right",
+        "baseline": "middle",
+        "dx": -9,
+
+        "font": "Source Sans 3",
         "fontSize": 12,
-        "fontWeight": 600,
-        "color": "#233d2f"
+        "fontWeight": 700,
+
+        "color": "#93643f"
       },
+
       "encoding": {
         "y": {
           "field": "city",
           "type": "nominal",
+
           "sort": [
             "Hobart",
             "Adelaide",
@@ -240,10 +298,68 @@
             "Melbourne"
           ]
         },
+
+        "x": {
+          "field": "food_cpi",
+          "type": "quantitative",
+          "scale": {
+            "domain": [2.5, 4.5],
+            "zero": false
+          }
+        },
+
+        "text": {
+          "signal": "format(datum.food_cpi, '.1f') + '%'"
+        }
+      }
+    },
+
+    {
+      "transform": [
+        {
+          "filter": "datum.city === 'Adelaide'"
+        }
+      ],
+
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 9,
+
+        "font": "Source Sans 3",
+        "fontSize": 12,
+        "fontWeight": 700,
+
+        "color": "#6f8f71"
+      },
+
+      "encoding": {
+        "y": {
+          "field": "city",
+          "type": "nominal",
+
+          "sort": [
+            "Hobart",
+            "Adelaide",
+            "Sydney",
+            "Brisbane",
+            "Darwin",
+            "Canberra",
+            "Perth",
+            "Melbourne"
+          ]
+        },
+
         "x": {
           "field": "all_groups_cpi",
-          "type": "quantitative"
+          "type": "quantitative",
+          "scale": {
+            "domain": [2.5, 4.5],
+            "zero": false
+          }
         },
+
         "text": {
           "signal": "format(datum.all_groups_cpi, '.1f') + '%'"
         }
@@ -253,22 +369,28 @@
     {
       "transform": [
         {
-          "filter": "datum.city === 'Hobart' || datum.city === 'Adelaide' || datum.city === 'Canberra' || datum.city === 'Melbourne'"
+          "filter": "datum.city === 'Melbourne'"
         }
       ],
+
       "mark": {
         "type": "text",
-        "align": "right",
-        "dx": -10,
-        "dy": 12,
+        "align": "left",
+        "baseline": "middle",
+        "dx": 12,
+
+        "font": "Source Sans 3",
         "fontSize": 12,
-        "fontWeight": 600,
-        "color": "#233d2f"
+        "fontWeight": 700,
+
+        "color": "#536158"
       },
+
       "encoding": {
         "y": {
           "field": "city",
           "type": "nominal",
+
           "sort": [
             "Hobart",
             "Adelaide",
@@ -280,21 +402,28 @@
             "Melbourne"
           ]
         },
+
         "x": {
-          "field": "food_cpi",
-          "type": "quantitative"
+          "field": "all_groups_cpi",
+          "type": "quantitative",
+          "scale": {
+            "domain": [2.5, 4.5],
+            "zero": false
+          }
         },
+
         "text": {
-          "signal": "format(datum.food_cpi, '.1f') + '%'"
+          "signal": "format(datum.all_groups_cpi, '.1f') + '% both'"
         }
       }
     }
   ],
 
   "config": {
+    "background": "#ffffff",
+
     "view": {
       "stroke": null
-    },
-    "background": "#f7f7f5"
+    }
   }
 }

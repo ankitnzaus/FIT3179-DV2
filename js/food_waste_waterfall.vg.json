@@ -1,46 +1,75 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "width": 760,
-  "height": 400,
+  "width": "container",
+  "height": 390,
+
+  "padding": {
+    "left": 8,
+    "top": 8,
+    "right": 20,
+    "bottom": 8
+  },
 
   "title": {
     "text": "Meeting the 2030 ambition requires preventing millions of tonnes",
-    "subtitle": "Modelled annual food waste under the recommended reduction scenario",
+    "subtitle": "Modelled annual food waste under the recommended reduction scenario • Dashed line shows the halfway point",
     "anchor": "start",
-    "fontSize": 21,
-    "subtitleFontSize": 14,
-    "subtitleColor": "#5f6b63",
-    "color": "#1f3529",
-    "offset": 16
+
+    "font": "Manrope",
+    "fontSize": 20,
+    "fontWeight": 700,
+    "color": "#183f2c",
+
+    "subtitleFont": "Source Sans 3",
+    "subtitleFontSize": 13,
+    "subtitleFontWeight": 400,
+    "subtitleColor": "#68746d",
+
+    "offset": 50
   },
 
   "data": {
-    "url": "data/food_waste_2030_target.csv"
+    "url": "data/food_waste_2030_target.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "stage": "number",
+        "amount": "number",
+        "start": "number",
+        "end": "number"
+      }
+    }
   },
 
   "layer": [
     {
       "mark": {
         "type": "bar",
-        "width": 110,
-        "cornerRadius": 3
+        "width": 115,
+        "cornerRadius": 4
       },
 
       "encoding": {
         "x": {
-          "field": "label",
-          "type": "nominal",
-          "sort": {
-            "field": "stage",
-            "order": "ascending"
-          },
+          "field": "stage",
+          "type": "ordinal",
+          "sort": "ascending",
           "title": null,
+
           "axis": {
+            "values": [1, 2, 3],
+
+            "labelExpr": "datum.value === 1 ? '2030 without action' : datum.value === 2 ? 'Waste prevented' : '2030 recommended'",
+
             "labelAngle": 0,
+            "labelFont": "Source Sans 3",
             "labelFontSize": 12,
-            "labelLimit": 190,
+            "labelFontWeight": 500,
+            "labelColor": "#43544a",
+            "labelLimit": 240,
             "labelPadding": 12,
+
             "domain": false,
             "ticks": false
           }
@@ -49,15 +78,29 @@
         "y": {
           "field": "end",
           "type": "quantitative",
+
           "title": "Food waste (million tonnes)",
+
           "scale": {
             "domain": [0, 10]
           },
+
           "axis": {
+            "grid": true,
             "gridColor": "#ece8df",
+            "gridOpacity": 1,
+
             "domain": false,
+            "ticks": false,
+
+            "labelFont": "Source Sans 3",
+            "labelFontSize": 11,
+            "labelColor": "#536158",
+
+            "titleFont": "Source Sans 3",
             "titleFontSize": 12,
-            "labelFontSize": 11
+            "titleFontWeight": 600,
+            "titleColor": "#233d2f"
           }
         },
 
@@ -68,16 +111,19 @@
         "color": {
           "field": "type",
           "type": "nominal",
+
           "scale": {
             "domain": [
               "total",
               "reduction"
             ],
+
             "range": [
               "#6f8f72",
               "#93643f"
             ]
           },
+
           "legend": null
         },
 
@@ -107,20 +153,18 @@
 
       "mark": {
         "type": "text",
-        "fontSize": 15,
-        "fontWeight": "bold",
-        "dy": -12,
-        "color": "#24352d"
+        "font": "Source Sans 3",
+        "fontSize": 14,
+        "fontWeight": 700,
+        "dy": -11,
+        "color": "#233d2f"
       },
 
       "encoding": {
         "x": {
-          "field": "label",
-          "type": "nominal",
-          "sort": {
-            "field": "stage",
-            "order": "ascending"
-          }
+          "field": "stage",
+          "type": "ordinal",
+          "sort": "ascending"
         },
 
         "y": {
@@ -138,8 +182,7 @@
       "data": {
         "values": [
           {
-            "y": 4.6,
-            "label": "Approximate halfway point"
+            "y": 4.6
           }
         ]
       },
@@ -148,7 +191,8 @@
         "type": "rule",
         "strokeDash": [6, 5],
         "stroke": "#8b9f79",
-        "strokeWidth": 1.5
+        "strokeWidth": 1.5,
+        "opacity": 0.9
       },
 
       "encoding": {
@@ -165,16 +209,6 @@
 
     "view": {
       "stroke": null
-    },
-
-    "title": {
-      "font": "Arial",
-      "subtitleFont": "Arial"
-    },
-
-    "axis": {
-      "labelFont": "Arial",
-      "titleFont": "Arial"
     }
   }
 }

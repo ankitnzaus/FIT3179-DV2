@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
   "width": "container",
-  "height": 520,
+  "height": 410,
 
   "title": {
     "text": "Where did food horticulture value change the most?",
@@ -16,7 +16,7 @@
     "subtitleFontSize": 13,
     "subtitleFontWeight": 400,
     "subtitleColor": "#68746d",
-    "offset": 14
+    "offset": 50
   },
 
   "projection": {
@@ -50,6 +50,7 @@
         {
           "filter": "datum.state !== 'Australian Capital Territory'"
         },
+
         {
           "lookup": "state",
           "from": {
@@ -94,11 +95,15 @@
           "legend": {
             "title": "% change",
             "orient": "right",
-            "gradientLength": 200,
+            "offset": 10,
+            "gradientLength": 160,
             "gradientThickness": 13,
+
             "titleFont": "Source Sans 3",
             "titleFontSize": 12,
             "titleFontWeight": 700,
+            "titleColor": "#233d2f",
+
             "labelFont": "Source Sans 3",
             "labelFontSize": 11,
             "labelColor": "#58655e"

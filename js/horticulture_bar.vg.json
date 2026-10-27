@@ -1,5 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
   "width": "container",
   "height": 430,
 
@@ -7,11 +8,18 @@
     "text": "Victoria leads Australia’s food horticulture sector",
     "subtitle": "Food horticulture farm-gate value by state, 2024–25",
     "anchor": "start",
+
+    "font": "Manrope",
     "fontSize": 20,
-    "subtitleFontSize": 13,
-    "subtitleColor": "#68746d",
+    "fontWeight": 700,
     "color": "#183f2c",
-    "offset": 14
+
+    "subtitleFont": "Source Sans 3",
+    "subtitleFontSize": 13,
+    "subtitleFontWeight": 400,
+    "subtitleColor": "#68746d",
+
+    "offset": 50
   },
 
   "data": {
@@ -41,11 +49,16 @@
           "type": "nominal",
           "sort": "-x",
           "title": null,
+
           "axis": {
             "domain": false,
             "ticks": false,
             "labelPadding": 10,
-            "labelFontSize": 13
+
+            "labelFont": "Source Sans 3",
+            "labelFontSize": 13,
+            "labelFontWeight": 500,
+            "labelColor": "#24352d"
           }
         },
 
@@ -53,14 +66,28 @@
           "field": "value_billion",
           "type": "quantitative",
           "title": "Farm-gate value (A$ billions)",
+
           "scale": {
             "domain": [0, 4.8]
           },
+
           "axis": {
             "grid": true,
             "gridColor": "#ece9e1",
+            "gridOpacity": 1,
+
             "tickCount": 6,
-            "domain": false
+            "domain": false,
+            "ticks": false,
+
+            "labelFont": "Source Sans 3",
+            "labelFontSize": 11,
+            "labelColor": "#536158",
+
+            "titleFont": "Source Sans 3",
+            "titleFontSize": 12,
+            "titleFontWeight": 600,
+            "titleColor": "#233d2f"
           }
         },
 
@@ -69,6 +96,7 @@
             "test": "datum.state === 'Victoria'",
             "value": "#2f6d49"
           },
+
           "value": "#a7bea0"
         },
 
@@ -92,9 +120,13 @@
       "mark": {
         "type": "text",
         "align": "left",
+        "baseline": "middle",
         "dx": 8,
+
+        "font": "Source Sans 3",
         "fontSize": 12,
-        "fontWeight": "bold",
+        "fontWeight": 700,
+
         "color": "#34463c"
       },
 
@@ -121,6 +153,7 @@
 
   "config": {
     "background": "#ffffff",
+
     "view": {
       "stroke": null
     }

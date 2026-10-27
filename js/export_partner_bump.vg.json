@@ -1,17 +1,22 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 800,
-  "height": 430,
+
+  "width": "container",
+  "height": 410,
 
   "title": {
     "text": "The United States is rising, while China remains number one",
     "subtitle": "Rank among selected major AFF export destinations, 2021–22 to 2024–25",
     "anchor": "start",
-    "fontSize": 22,
-    "subtitleFontSize": 14,
-    "subtitleColor": "#5f6b63",
-    "color": "#1f3529",
-    "offset": 14
+    "font": "Manrope",
+    "fontSize": 20,
+    "fontWeight": 700,
+    "color": "#183f2c",
+    "subtitleFont": "Source Sans 3",
+    "subtitleFontSize": 13,
+    "subtitleFontWeight": 400,
+    "subtitleColor": "#68746d",
+    "offset": 50
   },
 
   "data": {
@@ -41,8 +46,12 @@
             "2024-25"
           ],
           "axis": {
+            "labelFont": "Source Sans 3",
             "labelFontSize": 12,
+            "labelFontWeight": 500,
             "labelColor": "#536158",
+            "labelAngle": 0,
+            "labelPadding": 10,
             "domain": false,
             "ticks": false,
             "grid": false
@@ -59,8 +68,13 @@
           },
           "axis": {
             "values": [1, 2, 3, 4, 5, 6, 8, 10, 12, 14, 16],
+            "labelFont": "Source Sans 3",
             "labelFontSize": 11,
+            "labelColor": "#536158",
+            "titleFont": "Source Sans 3",
             "titleFontSize": 12,
+            "titleFontWeight": 600,
+            "titleColor": "#233d2f",
             "grid": true,
             "gridColor": "#ece8df",
             "domain": false,
@@ -89,12 +103,7 @@
               "#c19a58"
             ]
           },
-          "legend": {
-            "title": null,
-            "orient": "right",
-            "labelFontSize": 12,
-            "symbolStrokeWidth": 4
-          }
+          "legend": null
         },
 
         "detail": {
@@ -138,8 +147,9 @@
       "mark": {
         "type": "text",
         "dx": 10,
+        "font": "Source Sans 3",
         "fontSize": 12,
-        "fontWeight": "bold",
+        "fontWeight": 700,
         "align": "left"
       },
 
@@ -197,23 +207,8 @@
 
   "config": {
     "background": "#ffffff",
-
     "view": {
       "stroke": null
-    },
-
-    "title": {
-      "font": "Arial",
-      "subtitleFont": "Arial"
-    },
-
-    "axis": {
-      "labelFont": "Arial",
-      "titleFont": "Arial"
-    },
-
-    "legend": {
-      "labelFont": "Arial"
     }
   }
 }

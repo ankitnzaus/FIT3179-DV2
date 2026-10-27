@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
 
-  "width": 940,
+  "width": 1080,
   "height": 360,
 
   "padding": {
@@ -34,13 +34,12 @@
     "subtitleFontWeight": 400,
     "subtitleColor": "#68746d",
 
-    "offset": 14
+    "offset": 50
   },
 
   "data": [
     {
       "name": "tree",
-
       "url": "data/horticulture_australia_2024_25.csv",
 
       "format": {
@@ -84,7 +83,6 @@
 
     {
       "name": "leaves",
-
       "source": "tree",
 
       "transform": [
@@ -99,7 +97,6 @@
   "scales": [
     {
       "name": "color",
-
       "type": "ordinal",
 
       "domain": [

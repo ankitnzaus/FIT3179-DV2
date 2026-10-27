@@ -11,15 +11,18 @@
       "Line width represents export value"
     ],
     "anchor": "start",
+
     "font": "Manrope",
-    "fontSize": 22,
+    "fontSize": 20,
     "fontWeight": 700,
+    "color": "#183f2c",
+
     "subtitleFont": "Source Sans 3",
-    "subtitleFontSize": 14,
+    "subtitleFontSize": 13,
     "subtitleFontWeight": 400,
-    "subtitleColor": "#5f6b63",
-    "color": "#1f3529",
-    "offset": 14
+    "subtitleColor": "#68746d",
+
+    "offset": 50
   },
 
   "projection": {
@@ -194,17 +197,74 @@
         },
 
         {
-          "calculate": "datum.destination === 'China' ? 'China  A$17.0b' : datum.destination === 'United States' ? 'United States  A$9.3b' : datum.destination === 'Japan' ? 'Japan  A$5.5b' : datum.destination === 'South Korea' ? 'South Korea  A$4.2b' : datum.destination === 'Indonesia' ? 'Indonesia  A$4.2b' : 'India  A$3.0b'",
-          "as": "label"
-        },
-
-        {
-          "calculate": "datum.destination === 'United States' ? -105 : datum.destination === 'India' ? 72 : datum.destination === 'China' ? 102 : datum.destination === 'South Korea' ? 116 : datum.destination === 'Japan' ? 148 : 119",
+          "calculate": "datum.destination === 'United States' ? -103 : datum.destination === 'India' ? 88 : datum.destination === 'China' ? 126 : datum.destination === 'South Korea' ? 137 : datum.destination === 'Japan' ? 154 : 140",
           "as": "label_longitude"
         },
 
         {
-          "calculate": "datum.destination === 'United States' ? 43 : datum.destination === 'India' ? 30 : datum.destination === 'China' ? 47 : datum.destination === 'South Korea' ? 39 : datum.destination === 'Japan' ? 32 : 1",
+          "calculate": "datum.destination === 'United States' ? 44 : datum.destination === 'India' ? 27 : datum.destination === 'China' ? 49 : datum.destination === 'South Korea' ? 40 : datum.destination === 'Japan' ? 31 : -8",
+          "as": "label_latitude"
+        }
+      ],
+
+      "mark": {
+        "type": "rule",
+        "color": "#8f8a80",
+        "strokeWidth": 1,
+        "opacity": 0.75
+      },
+
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+
+        "longitude2": {
+          "field": "label_longitude"
+        },
+
+        "latitude2": {
+          "field": "label_latitude"
+        }
+      }
+    },
+
+    {
+      "data": {
+        "url": "data/aff_export_destinations_2024_25.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "value_aud_million": "number",
+            "latitude": "number",
+            "longitude": "number"
+          }
+        }
+      },
+
+      "transform": [
+        {
+          "filter": "datum.destination === 'United States' || datum.destination === 'China' || datum.destination === 'Japan' || datum.destination === 'South Korea' || datum.destination === 'Indonesia' || datum.destination === 'India'"
+        },
+
+        {
+          "calculate": "datum.destination === 'China' ? 'China A$17.0b' : datum.destination === 'United States' ? 'United States A$9.3b' : datum.destination === 'Japan' ? 'Japan A$5.5b' : datum.destination === 'South Korea' ? 'South Korea A$4.2b' : datum.destination === 'Indonesia' ? 'Indonesia A$4.2b' : 'India A$3.0b'",
+          "as": "label"
+        },
+
+        {
+          "calculate": "datum.destination === 'United States' ? -103 : datum.destination === 'India' ? 88 : datum.destination === 'China' ? 126 : datum.destination === 'South Korea' ? 137 : datum.destination === 'Japan' ? 154 : 150",
+          "as": "label_longitude"
+        },
+
+        {
+          "calculate": "datum.destination === 'United States' ? 44 : datum.destination === 'India' ? 27 : datum.destination === 'China' ? 49 : datum.destination === 'South Korea' ? 40 : datum.destination === 'Japan' ? 31 : -8",
           "as": "label_latitude"
         }
       ],
@@ -212,7 +272,7 @@
       "mark": {
         "type": "text",
         "font": "Source Sans 3",
-        "fontSize": 12,
+        "fontSize": 11.5,
         "fontWeight": 700,
         "color": "#24352d",
         "align": "center",
@@ -281,9 +341,11 @@
         "type": "text",
         "dx": 12,
         "dy": -10,
+
         "font": "Source Sans 3",
-        "fontSize": 13,
+        "fontSize": 12,
         "fontWeight": 700,
+
         "color": "#244b35",
         "align": "left"
       },

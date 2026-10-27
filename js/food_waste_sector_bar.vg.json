@@ -1,22 +1,42 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "width": 800,
+  "width": "container",
   "height": 390,
+
+  "padding": {
+    "left": 70,
+    "top": 8,
+    "right": 25,
+    "bottom": 8
+  },
 
   "title": {
     "text": "Food is wasted at every stage — but households contribute the most",
     "subtitle": "Estimated Australian food waste by supply-chain stage, 2021",
     "anchor": "start",
-    "fontSize": 22,
-    "subtitleFontSize": 14,
-    "subtitleColor": "#5f6b63",
-    "color": "#1f3529",
-    "offset": 14
+
+    "font": "Manrope",
+    "fontSize": 20,
+    "fontWeight": 700,
+    "color": "#183f2c",
+
+    "subtitleFont": "Source Sans 3",
+    "subtitleFontSize": 13,
+    "subtitleFontWeight": 400,
+    "subtitleColor": "#68746d",
+
+    "offset": 50
   },
 
   "data": {
-    "url": "data/food_waste_sector_2021.csv"
+    "url": "data/food_waste_sector_2021.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "waste_million_tonnes": "number"
+      }
+    }
   },
 
   "layer": [
@@ -32,10 +52,15 @@
           "type": "nominal",
           "sort": "-x",
           "title": null,
+
           "axis": {
+            "labelFont": "Source Sans 3",
             "labelFontSize": 13,
+            "labelFontWeight": 500,
             "labelColor": "#24352d",
             "labelPadding": 10,
+            "labelLimit": 220,
+
             "domain": false,
             "ticks": false
           }
@@ -44,18 +69,40 @@
         "x": {
           "field": "waste_million_tonnes",
           "type": "quantitative",
+
           "title": "Food waste (million tonnes)",
+
           "scale": {
             "domain": [0, 2.7]
           },
+
           "axis": {
-            "values": [0, 0.5, 1.0, 1.5, 2.0, 2.5],
+            "values": [
+              0,
+              0.5,
+              1.0,
+              1.5,
+              2.0,
+              2.5
+            ],
+
             "format": ".1f",
+
             "grid": true,
             "gridColor": "#ece8df",
+            "gridOpacity": 1,
+
             "domain": false,
+            "ticks": false,
+
+            "labelFont": "Source Sans 3",
+            "labelFontSize": 11,
+            "labelColor": "#536158",
+
+            "titleFont": "Source Sans 3",
             "titleFontSize": 12,
-            "labelFontSize": 11
+            "titleFontWeight": 600,
+            "titleColor": "#233d2f"
           }
         },
 
@@ -64,6 +111,7 @@
             "test": "datum.sector === 'Households'",
             "value": "#93643f"
           },
+
           "value": "#9bb19a"
         },
 
@@ -87,9 +135,13 @@
       "mark": {
         "type": "text",
         "align": "left",
+        "baseline": "middle",
         "dx": 8,
+
+        "font": "Source Sans 3",
         "fontSize": 12,
-        "fontWeight": "bold",
+        "fontWeight": 700,
+
         "color": "#24352d"
       },
 
@@ -116,16 +168,9 @@
 
   "config": {
     "background": "#ffffff",
+
     "view": {
       "stroke": null
-    },
-    "title": {
-      "font": "Arial",
-      "subtitleFont": "Arial"
-    },
-    "axis": {
-      "labelFont": "Arial",
-      "titleFont": "Arial"
     }
   }
 }

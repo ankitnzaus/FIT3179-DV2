@@ -1,0 +1,157 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "width": 800,
+  "height": 380,
+
+  "title": {
+    "text": "Food prices continued rising, but slower than overall inflation",
+    "subtitle": "Annual percentage change, April 2025 to June 2026",
+    "anchor": "start",
+    "fontSize": 22,
+    "subtitleFontSize": 14,
+    "subtitleColor": "#5f6b63",
+    "color": "#1f3529",
+    "offset": 14
+  },
+
+  "data": {
+    "url": "data/food_inflation_2025_26.csv"
+  },
+
+  "transform": [
+    {
+      "fold": [
+        "food_inflation",
+        "headline_cpi"
+      ],
+      "as": [
+        "series",
+        "value"
+      ]
+    },
+    {
+      "calculate": "datum.series === 'food_inflation' ? 'Food & non-alcoholic beverages' : 'All groups CPI'",
+      "as": "series_label"
+    }
+  ],
+
+  "mark": {
+    "type": "line",
+    "strokeWidth": 3,
+    "point": {
+      "filled": true,
+      "size": 70
+    }
+  },
+
+  "encoding": {
+    "x": {
+      "field": "month",
+      "type": "ordinal",
+      "title": null,
+      "sort": [
+        "Apr-25",
+        "May-25",
+        "Jun-25",
+        "Jul-25",
+        "Aug-25",
+        "Sep-25",
+        "Oct-25",
+        "Nov-25",
+        "Dec-25",
+        "Jan-26",
+        "Feb-26",
+        "Mar-26",
+        "Apr-26",
+        "May-26",
+        "Jun-26"
+      ],
+      "axis": {
+        "labelAngle": -45,
+        "labelFontSize": 11,
+        "labelColor": "#536158",
+        "domain": false,
+        "ticks": false
+      }
+    },
+
+    "y": {
+      "field": "value",
+      "type": "quantitative",
+      "title": "Annual change (%)",
+      "scale": {
+        "domain": [0, 5]
+      },
+      "axis": {
+        "grid": true,
+        "gridColor": "#ece8df",
+        "domain": false,
+        "labelFontSize": 11,
+        "titleFontSize": 12
+      }
+    },
+
+    "color": {
+      "field": "series_label",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "Food & non-alcoholic beverages",
+          "All groups CPI"
+        ],
+        "range": [
+          "#93643f",
+          "#6f8f72"
+        ]
+      },
+      "legend": {
+        "title": null,
+        "orient": "top",
+        "direction": "horizontal",
+        "labelFontSize": 12
+      }
+    },
+
+    "tooltip": [
+      {
+        "field": "month",
+        "type": "ordinal",
+        "title": "Month"
+      },
+      {
+        "field": "series_label",
+        "type": "nominal",
+        "title": "Series"
+      },
+      {
+        "field": "value",
+        "type": "quantitative",
+        "title": "Annual change (%)",
+        "format": ".1f"
+      }
+    ]
+  },
+
+  "config": {
+    "background": "#ffffff",
+
+    "view": {
+      "stroke": null
+    },
+
+    "title": {
+      "font": "Arial",
+      "subtitleFont": "Arial"
+    },
+
+    "axis": {
+      "labelFont": "Arial",
+      "titleFont": "Arial"
+    },
+
+    "legend": {
+      "labelFont": "Arial"
+    }
+  }
+}

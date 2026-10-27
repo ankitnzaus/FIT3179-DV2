@@ -1,0 +1,180 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "width": 760,
+  "height": 400,
+
+  "title": {
+    "text": "Meeting the 2030 ambition requires preventing millions of tonnes",
+    "subtitle": "Modelled annual food waste under the recommended reduction scenario",
+    "anchor": "start",
+    "fontSize": 21,
+    "subtitleFontSize": 14,
+    "subtitleColor": "#5f6b63",
+    "color": "#1f3529",
+    "offset": 16
+  },
+
+  "data": {
+    "url": "data/food_waste_2030_target.csv"
+  },
+
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "width": 110,
+        "cornerRadius": 3
+      },
+
+      "encoding": {
+        "x": {
+          "field": "label",
+          "type": "nominal",
+          "sort": {
+            "field": "stage",
+            "order": "ascending"
+          },
+          "title": null,
+          "axis": {
+            "labelAngle": 0,
+            "labelFontSize": 12,
+            "labelLimit": 190,
+            "labelPadding": 12,
+            "domain": false,
+            "ticks": false
+          }
+        },
+
+        "y": {
+          "field": "end",
+          "type": "quantitative",
+          "title": "Food waste (million tonnes)",
+          "scale": {
+            "domain": [0, 10]
+          },
+          "axis": {
+            "gridColor": "#ece8df",
+            "domain": false,
+            "titleFontSize": 12,
+            "labelFontSize": 11
+          }
+        },
+
+        "y2": {
+          "field": "start"
+        },
+
+        "color": {
+          "field": "type",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "total",
+              "reduction"
+            ],
+            "range": [
+              "#6f8f72",
+              "#93643f"
+            ]
+          },
+          "legend": null
+        },
+
+        "tooltip": [
+          {
+            "field": "label",
+            "type": "nominal",
+            "title": "Scenario"
+          },
+          {
+            "field": "amount",
+            "type": "quantitative",
+            "title": "Amount (million tonnes)",
+            "format": "+.1f"
+          }
+        ]
+      }
+    },
+
+    {
+      "transform": [
+        {
+          "calculate": "datum.type === 'reduction' ? '−4.8 Mt' : format(datum.amount, '.1f') + ' Mt'",
+          "as": "display"
+        }
+      ],
+
+      "mark": {
+        "type": "text",
+        "fontSize": 15,
+        "fontWeight": "bold",
+        "dy": -12,
+        "color": "#24352d"
+      },
+
+      "encoding": {
+        "x": {
+          "field": "label",
+          "type": "nominal",
+          "sort": {
+            "field": "stage",
+            "order": "ascending"
+          }
+        },
+
+        "y": {
+          "field": "end",
+          "type": "quantitative"
+        },
+
+        "text": {
+          "field": "display"
+        }
+      }
+    },
+
+    {
+      "data": {
+        "values": [
+          {
+            "y": 4.6,
+            "label": "Approximate halfway point"
+          }
+        ]
+      },
+
+      "mark": {
+        "type": "rule",
+        "strokeDash": [6, 5],
+        "stroke": "#8b9f79",
+        "strokeWidth": 1.5
+      },
+
+      "encoding": {
+        "y": {
+          "field": "y",
+          "type": "quantitative"
+        }
+      }
+    }
+  ],
+
+  "config": {
+    "background": "#ffffff",
+
+    "view": {
+      "stroke": null
+    },
+
+    "title": {
+      "font": "Arial",
+      "subtitleFont": "Arial"
+    },
+
+    "axis": {
+      "labelFont": "Arial",
+      "titleFont": "Arial"
+    }
+  }
+}

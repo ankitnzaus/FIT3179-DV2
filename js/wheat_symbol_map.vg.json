@@ -1,14 +1,28 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 700,
-  "height": 500,
+
+  "width": "container",
+  "height": 390,
+
   "title": {
     "text": "Australia's wheat production is concentrated in a few states",
-    "subtitle": "Wheat production sold by state, 2024–25",
+    "subtitle": "Wheat production sold by state, 2024–25 • Circle area represents production ('000 tonnes)",
+    "anchor": "start",
+    "font": "Manrope",
     "fontSize": 20,
+    "fontWeight": 700,
+    "color": "#183f2c",
+    "subtitleFont": "Source Sans 3",
     "subtitleFontSize": 13,
-    "anchor": "start"
+    "subtitleFontWeight": 400,
+    "subtitleColor": "#68746d",
+    "offset": 14
   },
+
+  "projection": {
+    "type": "mercator"
+  },
+
   "layer": [
     {
       "data": {
@@ -18,49 +32,56 @@
           "property": "features"
         }
       },
-      "projection": {
-        "type": "mercator"
-      },
+
       "mark": {
         "type": "geoshape",
         "fill": "#e8eee5",
-        "stroke": "white",
-        "strokeWidth": 1
+        "stroke": "#ffffff",
+        "strokeWidth": 1.2
       }
     },
+
     {
       "data": {
-        "url": "data/wheat_state_2024_25.csv"
+        "url": "data/wheat_state_2024_25.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "longitude": "number",
+            "latitude": "number",
+            "wheat_000_tonnes": "number"
+          }
+        }
       },
-      "projection": {
-        "type": "mercator"
-      },
+
       "mark": {
         "type": "circle",
-        "opacity": 0.8,
-        "stroke": "white",
-        "strokeWidth": 1
+        "opacity": 0.84,
+        "stroke": "#ffffff",
+        "strokeWidth": 1.2,
+        "color": "#b47b32"
       },
+
       "encoding": {
         "longitude": {
           "field": "longitude",
           "type": "quantitative"
         },
+
         "latitude": {
           "field": "latitude",
           "type": "quantitative"
         },
+
         "size": {
           "field": "wheat_000_tonnes",
           "type": "quantitative",
-          "title": "Wheat production ('000 tonnes)",
           "scale": {
-            "range": [40, 2500]
-          }
+            "range": [70, 3600]
+          },
+          "legend": null
         },
-        "color": {
-          "value": "#b47b32"
-        },
+
         "tooltip": [
           {
             "field": "state",
@@ -75,15 +96,74 @@
           }
         ]
       }
+    },
+
+    {
+      "data": {
+        "url": "data/wheat_state_2024_25.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "longitude": "number",
+            "latitude": "number",
+            "wheat_000_tonnes": "number"
+          }
+        }
+      },
+
+      "transform": [
+        {
+          "filter": "datum.state === 'Western Australia' || datum.state === 'New South Wales' || datum.state === 'Victoria' || datum.state === 'South Australia' || datum.state === 'Queensland'"
+        },
+
+        {
+          "calculate": "datum.state === 'Western Australia' ? 'WA  12.4M' : datum.state === 'New South Wales' ? 'NSW  13.1M' : datum.state === 'Victoria' ? 'VIC  4.2M' : datum.state === 'South Australia' ? 'SA  2.9M' : 'QLD  2.1M'",
+          "as": "label"
+        },
+
+        {
+          "calculate": "datum.state === 'Western Australia' ? 116.5 : datum.state === 'New South Wales' ? 153.5 : datum.state === 'Victoria' ? 147.5 : datum.state === 'South Australia' ? 132.5 : 150.5",
+          "as": "label_longitude"
+        },
+
+        {
+          "calculate": "datum.state === 'Western Australia' ? -28.2 : datum.state === 'New South Wales' ? -31.8 : datum.state === 'Victoria' ? -39.0 : datum.state === 'South Australia' ? -31.5 : -23.0",
+          "as": "label_latitude"
+        }
+      ],
+
+      "mark": {
+        "type": "text",
+        "font": "Source Sans 3",
+        "fontSize": 12,
+        "fontWeight": 700,
+        "color": "#233d2f",
+        "align": "center",
+        "baseline": "middle"
+      },
+
+      "encoding": {
+        "longitude": {
+          "field": "label_longitude",
+          "type": "quantitative"
+        },
+
+        "latitude": {
+          "field": "label_latitude",
+          "type": "quantitative"
+        },
+
+        "text": {
+          "field": "label"
+        }
+      }
     }
   ],
+
   "config": {
+    "background": "#ffffff",
     "view": {
       "stroke": null
-    },
-    "legend": {
-      "labelFontSize": 11,
-      "titleFontSize": 12
     }
   }
 }

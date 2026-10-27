@@ -1,91 +1,211 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 700,
-  "height": 360,
+
+  "width": "container",
+  "height": { "step": 44 },
+
+  "padding": {
+    "left": 0,
+    "top": 6,
+    "right": 10,
+    "bottom": 0
+  },
+
   "title": {
     "text": "Different states specialise in different horticultural products",
     "subtitle": "Farm-gate value by food horticulture category and state, 2024–25",
+    "anchor": "start",
+    "font": "Manrope",
     "fontSize": 20,
+    "fontWeight": 700,
+    "color": "#183f2c",
+    "subtitleFont": "Source Sans 3",
     "subtitleFontSize": 13,
-    "anchor": "start"
+    "subtitleFontWeight": 400,
+    "subtitleColor": "#68746d",
+    "offset": 14
   },
+
   "data": {
     "url": "data/horticulture_category_state_2024_25.csv"
   },
-  "mark": {
-    "type": "rect",
-    "stroke": "white",
-    "strokeWidth": 1
-  },
-  "encoding": {
-    "x": {
-      "field": "category",
-      "type": "nominal",
-      "title": null,
-      "sort": [
-        "Fruit",
-        "Vegetables",
-        "Nuts",
-        "Wine grapes"
-      ],
-      "axis": {
-        "labelFontSize": 12,
-        "labelAngle": 0
-      }
-    },
-    "y": {
-      "field": "state",
-      "type": "nominal",
-      "title": null,
-      "sort": [
-        "Queensland",
-        "Victoria",
-        "New South Wales",
-        "South Australia",
-        "Tasmania",
-        "Western Australia",
-        "Northern Territory",
-        "Australian Capital Territory"
-      ],
-      "axis": {
-        "labelFontSize": 12,
-        "labelLimit": 180
-      }
-    },
-    "color": {
-      "field": "value_m",
-      "type": "quantitative",
-      "title": "Farm-gate value ($m)",
-      "scale": {
-        "scheme": "greens"
-      }
-    },
-    "tooltip": [
-      {
-        "field": "state",
-        "type": "nominal",
-        "title": "State"
+
+  "transform": [
+    {
+      "filter": "datum.state !== 'Australian Capital Territory'"
+    }
+  ],
+
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "#ffffff",
+        "strokeWidth": 1.5,
+        "cornerRadius": 2
       },
-      {
-        "field": "category",
-        "type": "nominal",
-        "title": "Category"
-      },
-      {
-        "field": "value_m",
-        "type": "quantitative",
-        "title": "Value ($m)",
-        "format": ",.1f"
+
+      "encoding": {
+        "x": {
+          "field": "category",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "Fruit",
+            "Vegetables",
+            "Nuts",
+            "Wine grapes"
+          ],
+          "axis": {
+            "labelFont": "Source Sans 3",
+            "labelFontSize": 13,
+            "labelFontWeight": 500,
+            "labelColor": "#233d2f",
+            "labelAngle": 0,
+            "labelPadding": 9,
+            "ticks": false,
+            "domain": false
+          }
+        },
+
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "title": null,
+          "sort": [
+            "Queensland",
+            "Victoria",
+            "New South Wales",
+            "South Australia",
+            "Tasmania",
+            "Western Australia",
+            "Northern Territory"
+          ],
+          "axis": {
+            "labelFont": "Source Sans 3",
+            "labelFontSize": 13,
+            "labelFontWeight": 500,
+            "labelColor": "#233d2f",
+            "labelLimit": 220,
+            "labelPadding": 10,
+            "ticks": false,
+            "domain": false
+          }
+        },
+
+        "color": {
+          "field": "value_m",
+          "type": "quantitative",
+
+          "scale": {
+            "domain": [0, 2300],
+            "range": [
+              "#e6efe2",
+              "#97c78f",
+              "#48a85d",
+              "#0a7a2c"
+            ]
+          },
+
+          "legend": {
+            "title": "A$ million",
+            "orient": "right",
+            "direction": "vertical",
+            "offset": 12,
+            "gradientLength": 160,
+            "gradientThickness": 14,
+
+            "titleFont": "Source Sans 3",
+            "titleFontSize": 12,
+            "titleFontWeight": 700,
+            "titleColor": "#233d2f",
+
+            "labelFont": "Source Sans 3",
+            "labelFontSize": 11,
+            "labelColor": "#233d2f",
+
+            "format": ",.0f"
+          }
+        },
+
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "category",
+            "type": "nominal",
+            "title": "Category"
+          },
+          {
+            "field": "value_m",
+            "type": "quantitative",
+            "title": "Farm-gate value (A$ million)",
+            "format": ",.1f"
+          }
+        ]
       }
-    ]
-  },
+    },
+
+    {
+      "mark": {
+        "type": "text",
+        "font": "Source Sans 3",
+        "fontSize": 12,
+        "fontWeight": 700,
+        "baseline": "middle"
+      },
+
+      "encoding": {
+        "x": {
+          "field": "category",
+          "type": "nominal",
+          "sort": [
+            "Fruit",
+            "Vegetables",
+            "Nuts",
+            "Wine grapes"
+          ]
+        },
+
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "sort": [
+            "Queensland",
+            "Victoria",
+            "New South Wales",
+            "South Australia",
+            "Tasmania",
+            "Western Australia",
+            "Northern Territory"
+          ]
+        },
+
+        "text": {
+          "field": "value_m",
+          "type": "quantitative",
+          "format": ",.0f"
+        },
+
+        "color": {
+          "condition": {
+            "test": "datum.value_m >= 1200",
+            "value": "#ffffff"
+          },
+          "value": "#233d2f"
+        }
+      }
+    }
+  ],
+
   "config": {
+    "background": "#ffffff",
+
     "view": {
       "stroke": null
-    },
-    "legend": {
-      "labelFontSize": 11,
-      "titleFontSize": 12
     }
   }
 }

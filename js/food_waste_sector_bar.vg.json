@@ -1,0 +1,131 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "width": 800,
+  "height": 390,
+
+  "title": {
+    "text": "Food is wasted at every stage — but households contribute the most",
+    "subtitle": "Estimated Australian food waste by supply-chain stage, 2021",
+    "anchor": "start",
+    "fontSize": 22,
+    "subtitleFontSize": 14,
+    "subtitleColor": "#5f6b63",
+    "color": "#1f3529",
+    "offset": 14
+  },
+
+  "data": {
+    "url": "data/food_waste_sector_2021.csv"
+  },
+
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 4
+      },
+
+      "encoding": {
+        "y": {
+          "field": "sector",
+          "type": "nominal",
+          "sort": "-x",
+          "title": null,
+          "axis": {
+            "labelFontSize": 13,
+            "labelColor": "#24352d",
+            "labelPadding": 10,
+            "domain": false,
+            "ticks": false
+          }
+        },
+
+        "x": {
+          "field": "waste_million_tonnes",
+          "type": "quantitative",
+          "title": "Food waste (million tonnes)",
+          "scale": {
+            "domain": [0, 2.7]
+          },
+          "axis": {
+            "values": [0, 0.5, 1.0, 1.5, 2.0, 2.5],
+            "format": ".1f",
+            "grid": true,
+            "gridColor": "#ece8df",
+            "domain": false,
+            "titleFontSize": 12,
+            "labelFontSize": 11
+          }
+        },
+
+        "color": {
+          "condition": {
+            "test": "datum.sector === 'Households'",
+            "value": "#93643f"
+          },
+          "value": "#9bb19a"
+        },
+
+        "tooltip": [
+          {
+            "field": "sector",
+            "type": "nominal",
+            "title": "Stage"
+          },
+          {
+            "field": "waste_million_tonnes",
+            "type": "quantitative",
+            "title": "Food waste (million tonnes)",
+            "format": ".3f"
+          }
+        ]
+      }
+    },
+
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 8,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#24352d"
+      },
+
+      "encoding": {
+        "y": {
+          "field": "sector",
+          "type": "nominal",
+          "sort": "-x"
+        },
+
+        "x": {
+          "field": "waste_million_tonnes",
+          "type": "quantitative"
+        },
+
+        "text": {
+          "field": "waste_million_tonnes",
+          "type": "quantitative",
+          "format": ".2f"
+        }
+      }
+    }
+  ],
+
+  "config": {
+    "background": "#ffffff",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "font": "Arial",
+      "subtitleFont": "Arial"
+    },
+    "axis": {
+      "labelFont": "Arial",
+      "titleFont": "Arial"
+    }
+  }
+}

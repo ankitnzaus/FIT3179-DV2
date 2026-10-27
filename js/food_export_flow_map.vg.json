@@ -1,0 +1,316 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "width": "container",
+  "height": 460,
+
+  "title": {
+    "text": "Australia’s biggest AFF export markets are concentrated in Asia",
+    "subtitle": [
+      "Agriculture, fisheries and forestry exports by destination, 2024–25",
+      "Line width represents export value"
+    ],
+    "anchor": "start",
+    "font": "Manrope",
+    "fontSize": 22,
+    "fontWeight": 700,
+    "subtitleFont": "Source Sans 3",
+    "subtitleFontSize": 14,
+    "subtitleFontWeight": 400,
+    "subtitleColor": "#5f6b63",
+    "color": "#1f3529",
+    "offset": 14
+  },
+
+  "projection": {
+    "type": "equalEarth"
+  },
+
+  "layer": [
+    {
+      "data": {
+        "url": "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json",
+        "format": {
+          "type": "topojson",
+          "feature": "countries"
+        }
+      },
+
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e7ebe2",
+        "stroke": "#ffffff",
+        "strokeWidth": 0.5
+      }
+    },
+
+    {
+      "data": {
+        "url": "data/aff_export_destinations_2024_25.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "value_aud_million": "number",
+            "latitude": "number",
+            "longitude": "number"
+          }
+        }
+      },
+
+      "transform": [
+        {
+          "calculate": "133.7751",
+          "as": "origin_longitude"
+        },
+        {
+          "calculate": "-25.2744",
+          "as": "origin_latitude"
+        }
+      ],
+
+      "mark": {
+        "type": "rule",
+        "color": "#9b6a45",
+        "opacity": 0.68
+      },
+
+      "encoding": {
+        "longitude": {
+          "field": "origin_longitude",
+          "type": "quantitative"
+        },
+
+        "latitude": {
+          "field": "origin_latitude",
+          "type": "quantitative"
+        },
+
+        "longitude2": {
+          "field": "longitude"
+        },
+
+        "latitude2": {
+          "field": "latitude"
+        },
+
+        "size": {
+          "field": "value_aud_million",
+          "type": "quantitative",
+          "scale": {
+            "range": [1.5, 11]
+          },
+          "legend": null
+        },
+
+        "tooltip": [
+          {
+            "field": "destination",
+            "type": "nominal",
+            "title": "Destination"
+          },
+          {
+            "field": "value_aud_million",
+            "type": "quantitative",
+            "title": "Export value (A$ million)",
+            "format": ",.0f"
+          }
+        ]
+      }
+    },
+
+    {
+      "data": {
+        "url": "data/aff_export_destinations_2024_25.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "value_aud_million": "number",
+            "latitude": "number",
+            "longitude": "number"
+          }
+        }
+      },
+
+      "mark": {
+        "type": "circle",
+        "color": "#7b4f2e",
+        "stroke": "#ffffff",
+        "strokeWidth": 1.3,
+        "opacity": 0.95
+      },
+
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+
+        "size": {
+          "field": "value_aud_million",
+          "type": "quantitative",
+          "scale": {
+            "range": [80, 700]
+          },
+          "legend": null
+        },
+
+        "tooltip": [
+          {
+            "field": "destination",
+            "type": "nominal",
+            "title": "Destination"
+          },
+          {
+            "field": "value_aud_million",
+            "type": "quantitative",
+            "title": "Export value (A$ million)",
+            "format": ",.0f"
+          }
+        ]
+      }
+    },
+
+    {
+      "data": {
+        "url": "data/aff_export_destinations_2024_25.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "value_aud_million": "number",
+            "latitude": "number",
+            "longitude": "number"
+          }
+        }
+      },
+
+      "transform": [
+        {
+          "filter": "datum.destination === 'United States' || datum.destination === 'China' || datum.destination === 'Japan' || datum.destination === 'South Korea' || datum.destination === 'Indonesia' || datum.destination === 'India'"
+        },
+
+        {
+          "calculate": "datum.destination === 'China' ? 'China  A$17.0b' : datum.destination === 'United States' ? 'United States  A$9.3b' : datum.destination === 'Japan' ? 'Japan  A$5.5b' : datum.destination === 'South Korea' ? 'South Korea  A$4.2b' : datum.destination === 'Indonesia' ? 'Indonesia  A$4.2b' : 'India  A$3.0b'",
+          "as": "label"
+        },
+
+        {
+          "calculate": "datum.destination === 'United States' ? -105 : datum.destination === 'India' ? 72 : datum.destination === 'China' ? 102 : datum.destination === 'South Korea' ? 116 : datum.destination === 'Japan' ? 148 : 119",
+          "as": "label_longitude"
+        },
+
+        {
+          "calculate": "datum.destination === 'United States' ? 43 : datum.destination === 'India' ? 30 : datum.destination === 'China' ? 47 : datum.destination === 'South Korea' ? 39 : datum.destination === 'Japan' ? 32 : 1",
+          "as": "label_latitude"
+        }
+      ],
+
+      "mark": {
+        "type": "text",
+        "font": "Source Sans 3",
+        "fontSize": 12,
+        "fontWeight": 700,
+        "color": "#24352d",
+        "align": "center",
+        "baseline": "middle"
+      },
+
+      "encoding": {
+        "longitude": {
+          "field": "label_longitude",
+          "type": "quantitative"
+        },
+
+        "latitude": {
+          "field": "label_latitude",
+          "type": "quantitative"
+        },
+
+        "text": {
+          "field": "label"
+        }
+      }
+    },
+
+    {
+      "data": {
+        "values": [
+          {
+            "name": "Australia",
+            "latitude": -25.2744,
+            "longitude": 133.7751
+          }
+        ]
+      },
+
+      "mark": {
+        "type": "circle",
+        "color": "#244b35",
+        "size": 190
+      },
+
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        }
+      }
+    },
+
+    {
+      "data": {
+        "values": [
+          {
+            "name": "Australia",
+            "latitude": -25.2744,
+            "longitude": 133.7751
+          }
+        ]
+      },
+
+      "mark": {
+        "type": "text",
+        "dx": 12,
+        "dy": -10,
+        "font": "Source Sans 3",
+        "fontSize": 13,
+        "fontWeight": 700,
+        "color": "#244b35",
+        "align": "left"
+      },
+
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+
+        "text": {
+          "field": "name"
+        }
+      }
+    }
+  ],
+
+  "config": {
+    "view": {
+      "stroke": null
+    },
+
+    "background": "#ffffff"
+  }
+}

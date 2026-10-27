@@ -1,0 +1,219 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 800,
+  "height": 430,
+
+  "title": {
+    "text": "The United States is rising, while China remains number one",
+    "subtitle": "Rank among selected major AFF export destinations, 2021–22 to 2024–25",
+    "anchor": "start",
+    "fontSize": 22,
+    "subtitleFontSize": 14,
+    "subtitleColor": "#5f6b63",
+    "color": "#1f3529",
+    "offset": 14
+  },
+
+  "data": {
+    "url": "data/aff_partner_rank_2021_25.csv"
+  },
+
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3,
+        "point": {
+          "filled": true,
+          "size": 85
+        }
+      },
+
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": null,
+          "sort": [
+            "2021-22",
+            "2022-23",
+            "2023-24",
+            "2024-25"
+          ],
+          "axis": {
+            "labelFontSize": 12,
+            "labelColor": "#536158",
+            "domain": false,
+            "ticks": false,
+            "grid": false
+          }
+        },
+
+        "y": {
+          "field": "rank",
+          "type": "quantitative",
+          "title": "Export destination rank",
+          "scale": {
+            "reverse": true,
+            "domain": [1, 17]
+          },
+          "axis": {
+            "values": [1, 2, 3, 4, 5, 6, 8, 10, 12, 14, 16],
+            "labelFontSize": 11,
+            "titleFontSize": 12,
+            "grid": true,
+            "gridColor": "#ece8df",
+            "domain": false,
+            "tickColor": "#d7d2c8"
+          }
+        },
+
+        "color": {
+          "field": "destination",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "China",
+              "United States",
+              "Japan",
+              "South Korea",
+              "Indonesia",
+              "India"
+            ],
+            "range": [
+              "#244b35",
+              "#b26b3f",
+              "#6f8f72",
+              "#9d8067",
+              "#7a6f5a",
+              "#c19a58"
+            ]
+          },
+          "legend": {
+            "title": null,
+            "orient": "right",
+            "labelFontSize": 12,
+            "symbolStrokeWidth": 4
+          }
+        },
+
+        "detail": {
+          "field": "destination"
+        },
+
+        "tooltip": [
+          {
+            "field": "destination",
+            "type": "nominal",
+            "title": "Destination"
+          },
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Financial year"
+          },
+          {
+            "field": "rank",
+            "type": "quantitative",
+            "title": "Rank",
+            "format": ".0f"
+          },
+          {
+            "field": "value_aud_million",
+            "type": "quantitative",
+            "title": "Export value (A$ million)",
+            "format": ",.0f"
+          }
+        ]
+      }
+    },
+
+    {
+      "transform": [
+        {
+          "filter": "datum.year === '2024-25'"
+        }
+      ],
+
+      "mark": {
+        "type": "text",
+        "dx": 10,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "align": "left"
+      },
+
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "sort": [
+            "2021-22",
+            "2022-23",
+            "2023-24",
+            "2024-25"
+          ]
+        },
+
+        "y": {
+          "field": "rank",
+          "type": "quantitative",
+          "scale": {
+            "reverse": true,
+            "domain": [1, 17]
+          }
+        },
+
+        "text": {
+          "field": "destination"
+        },
+
+        "color": {
+          "field": "destination",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "China",
+              "United States",
+              "Japan",
+              "South Korea",
+              "Indonesia",
+              "India"
+            ],
+            "range": [
+              "#244b35",
+              "#b26b3f",
+              "#6f8f72",
+              "#9d8067",
+              "#7a6f5a",
+              "#c19a58"
+            ]
+          },
+          "legend": null
+        }
+      }
+    }
+  ],
+
+  "config": {
+    "background": "#ffffff",
+
+    "view": {
+      "stroke": null
+    },
+
+    "title": {
+      "font": "Arial",
+      "subtitleFont": "Arial"
+    },
+
+    "axis": {
+      "labelFont": "Arial",
+      "titleFont": "Arial"
+    },
+
+    "legend": {
+      "labelFont": "Arial"
+    }
+  }
+}

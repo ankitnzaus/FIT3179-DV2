@@ -1,73 +1,126 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 700,
-  "height": 360,
+  "width": "container",
+  "height": 430,
+
   "title": {
-    "text": "Victoria leads Australia's food horticulture sector",
+    "text": "Victoria leads Australia’s food horticulture sector",
     "subtitle": "Food horticulture farm-gate value by state, 2024–25",
+    "anchor": "start",
     "fontSize": 20,
     "subtitleFontSize": 13,
-    "anchor": "start"
+    "subtitleColor": "#68746d",
+    "color": "#183f2c",
+    "offset": 14
   },
+
   "data": {
     "url": "data/horticulture_state_2024_25.csv"
   },
+
   "transform": [
     {
-      "filter": "datum.state != 'Australian Capital Territory'"
+      "filter": "datum.state !== 'Australian Capital Territory'"
     },
     {
       "calculate": "datum.horticulture_value_2024_25 / 1000",
-      "as": "value_b"
+      "as": "value_billion"
     }
   ],
-  "mark": {
-    "type": "bar",
-    "cornerRadiusEnd": 4
-  },
-  "encoding": {
-    "y": {
-      "field": "state",
-      "type": "nominal",
-      "sort": "-x",
-      "title": null,
-      "axis": {
-        "labelFontSize": 12,
-        "labelLimit": 180
-      }
-    },
-    "x": {
-      "field": "value_b",
-      "type": "quantitative",
-      "title": "Farm-gate value ($ billions)",
-      "axis": {
-        "format": ".1f",
-        "labelFontSize": 11,
-        "titleFontSize": 12
-      }
-    },
-    "color": {
-      "condition": {
-        "test": "datum.state == 'Victoria'",
-        "value": "#2f6b49"
+
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 5
       },
-      "value": "#9fbd96"
-    },
-    "tooltip": [
-      {
-        "field": "state",
-        "type": "nominal",
-        "title": "State"
-      },
-      {
-        "field": "value_b",
-        "type": "quantitative",
-        "title": "2024–25 value ($b)",
-        "format": ".2f"
+
+      "encoding": {
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "sort": "-x",
+          "title": null,
+          "axis": {
+            "domain": false,
+            "ticks": false,
+            "labelPadding": 10,
+            "labelFontSize": 13
+          }
+        },
+
+        "x": {
+          "field": "value_billion",
+          "type": "quantitative",
+          "title": "Farm-gate value (A$ billions)",
+          "scale": {
+            "domain": [0, 4.8]
+          },
+          "axis": {
+            "grid": true,
+            "gridColor": "#ece9e1",
+            "tickCount": 6,
+            "domain": false
+          }
+        },
+
+        "color": {
+          "condition": {
+            "test": "datum.state === 'Victoria'",
+            "value": "#2f6d49"
+          },
+          "value": "#a7bea0"
+        },
+
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "value_billion",
+            "type": "quantitative",
+            "title": "A$ billions",
+            "format": ".2f"
+          }
+        ]
       }
-    ]
-  },
+    },
+
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 8,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#34463c"
+      },
+
+      "encoding": {
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "sort": "-x"
+        },
+
+        "x": {
+          "field": "value_billion",
+          "type": "quantitative"
+        },
+
+        "text": {
+          "field": "value_billion",
+          "type": "quantitative",
+          "format": ".2f"
+        }
+      }
+    }
+  ],
+
   "config": {
+    "background": "#ffffff",
     "view": {
       "stroke": null
     }

@@ -1,0 +1,107 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "width": 570,
+  "height": 430,
+
+  "title": {
+    "text": "Around three in every ten tonnes of food waste comes from households",
+    "subtitle": "Approximate household share of Australia's annual food waste",
+    "anchor": "start",
+    "fontSize": 21,
+    "subtitleFontSize": 14,
+    "subtitleColor": "#5f6b63",
+    "color": "#1f3529",
+    "offset": 18
+  },
+
+  "data": {
+    "sequence": {
+      "start": 1,
+      "stop": 101,
+      "as": "square"
+    }
+  },
+
+  "transform": [
+    {
+      "calculate": "(datum.square - 1) % 10",
+      "as": "column"
+    },
+    {
+      "calculate": "floor((datum.square - 1) / 10)",
+      "as": "row"
+    },
+    {
+      "calculate": "datum.square <= 30 ? 'Household waste' : 'Other stages'",
+      "as": "group"
+    }
+  ],
+
+  "mark": {
+    "type": "square",
+    "size": 900,
+    "cornerRadius": 3
+  },
+
+  "encoding": {
+    "x": {
+      "field": "column",
+      "type": "ordinal",
+      "axis": null
+    },
+
+    "y": {
+      "field": "row",
+      "type": "ordinal",
+      "sort": "ascending",
+      "axis": null
+    },
+
+    "color": {
+      "field": "group",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "Household waste",
+          "Other stages"
+        ],
+        "range": [
+          "#93643f",
+          "#e5e7df"
+        ]
+      },
+      "legend": {
+        "title": null,
+        "orient": "bottom",
+        "direction": "horizontal",
+        "labelFontSize": 12
+      }
+    },
+
+    "tooltip": [
+      {
+        "field": "group",
+        "type": "nominal",
+        "title": null
+      }
+    ]
+  },
+
+  "config": {
+    "background": "#ffffff",
+
+    "view": {
+      "stroke": null
+    },
+
+    "title": {
+      "font": "Arial",
+      "subtitleFont": "Arial"
+    },
+
+    "legend": {
+      "labelFont": "Arial"
+    }
+  }
+}
